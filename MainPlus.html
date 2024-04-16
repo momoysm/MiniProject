@@ -19,15 +19,10 @@
 
         .title {
             height: 150px;
-
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            
-            /* background-color: white;
-            background-position: center;
-            background-size: cover; */
         }
 
         .title > a{
@@ -76,13 +71,68 @@
             text-shadow: 2px 2px 2px gray;
         }
 
+        .team > p > span{
+            margin-left: 10px;
+        }
+
         .members{
             width: 1200px;
             margin: 30px auto;
         }
 
         .card{
+            background-color: transparent;
+            border:3px solid white;
             cursor: pointer;
+            font-family: "Jua", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 24px;
+            text-shadow: 2px 2px 2px gray;
+            color: white;
+            
+        }
+
+        .btn_group{
+            width: 1200px;
+            min-height: 100px;
+            margin: 50px auto;
+            padding: 0 10px 0 10px;
+        }
+
+        .btn_group > button{
+            float: right;
+            /* background-color:#0a0a23; */
+            background-color: transparent;
+            color: #fff;
+
+            /* border:none; */
+            border:3px solid white;
+            border-radius:10px; 
+
+            padding:15px;
+            min-height:30px; 
+            min-width: 120px;
+
+            font-family: "Jua", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 26px;
+        }
+
+        .footer{
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            font-family: "Jua", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 24px;
+
+            color: black;
         }
     </style>
 </head>
@@ -93,16 +143,25 @@
 
     <div class="team">
         <h4>팀 소개</h4>
-        <p>팀의 특징:</p>
-        <p>팀의 목표:</p>
-        <p>팀의 약속:</p>
-        <p>팀에 대한 설명:</p>
+        <p>팀 이름 : <span>비실비실</span></p>
+        <p>팀의 특징 : <span>전혀 비실비실하지않다</span></p>
+        <p>팀의 목표 : <span>세계 최고의 개발자!</span></p>
+        <p>팀의 약속 : <span>최고가 되어서 만나자.</span></p>
+        <p>팀에 대한 설명 :<span>원피스는 존재한다.</span></p>
     </div>
     
     <div class="members">
         <div id="memberCards" class="row row-cols-1 row-cols-md-3 g-4">
     
         </div>
+    </div>
+
+    <div class="btn_group">
+        <button type="button">업로드</button>
+    </div>
+
+    <div class="footer">
+        <p>made by bisilbisil</p>
     </div>
 </body>
 <script type="module">
