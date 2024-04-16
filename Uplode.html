@@ -48,12 +48,12 @@
 
 
     $("#uploadBtn").click(async function () {
-        // alert("test");
         let photo = $('#photo').val();
         let name = $('#name').val();
         let birth = $('#birth').val();
         let mbti = $('#mbti').val();
         let phone = $('#phone').val();
+        let blog = $('#blog').val();
         let aboutMe = $('#aboutMe').val();
         let myAdvantages = $('#myAdvantages').val();
         let myWorkStyle = $('#myWorkStyle').val();
@@ -64,11 +64,12 @@
             'birth': birth,
             'mbti': mbti,
             'phone': phone,
+            'blog': blog,
             'aboutMe': aboutMe,
             'myAdvantages': myAdvantages,
             'myWorkStyle': myWorkStyle,
         };
-        await addDoc(collection(db, "test"), doc);
+        await addDoc(collection(db, "user"), doc);
         alert("저장 완료");
         window.location.reload();
     })
