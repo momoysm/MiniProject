@@ -46,19 +46,27 @@
     const analytics = getAnalytics(app);
     const db = getFirestore(app);
 
-    
+
     $("#uploadBtn").click(async function () {
         // alert("test");
-        let image = $('#image').val();
+        let photo = $('#photo').val();
+        let name = $('#name').val();
+        let birth = $('#birth').val();
         let mbti = $('#mbti').val();
-        let blog = $('#blog').val();
-        let explanation = $('#explanation').val();
+        let phone = $('#phone').val();
+        let aboutMe = $('#aboutMe').val();
+        let myAdvantages = $('#myAdvantages').val();
+        let myWorkStyle = $('#myWorkStyle').val();
 
         let doc = {
-            'image': image,
+            'photo': photo,
+            'name': name,
+            'birth': birth,
             'mbti': mbti,
-            'blog': blog,
-            'explanation': explanation
+            'phone': phone,
+            'aboutMe': aboutMe,
+            'myAdvantages': myAdvantages,
+            'myWorkStyle': myWorkStyle,
         };
         await addDoc(collection(db, "test"), doc);
         alert("저장 완료");
@@ -71,21 +79,42 @@
 <body>
     <div class="uploadArea" id="uploadArea">
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="image" placeholder="이미지 주소">
+            <input type="email" class="form-control" id="photo" placeholder="이미지 주소">
             <label for="floatingInput">이미지 주소</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="name" placeholder="이름">
+            <label for="floatingInput">이름</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="birth" placeholder="생년월일">
+            <label for="floatingInput">생년월일</label>
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="mbti" placeholder="mbti">
             <label for="floatingInput">MBTI</label>
         </div>
         <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="phone" placeholder="연락처">
+            <label for="floatingInput">연락처</label>
+        </div>
+        <div class="form-floating mb-3">
             <input type="email" class="form-control" id="blog" placeholder="블로그 주소">
             <label for="floatingInput">블로그 주소</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="explanation" placeholder="설명">
-            <label for="floatingInput">설명</label>
+            <input type="email" class="form-control" id="aboutMe" placeholder="나에 대하여">
+            <label for="floatingInput">나에 대하여</label>
         </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="myAdvantages" placeholder="나의 장점">
+            <label for="floatingInput">나의 장점</label>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea type="email" class="form-control" id="myWorkStyle" placeholder="나의 협업 스타일"></textarea>
+            <label for="floatingInput">나의 협업 스타일</label>
+        </div>
+
         <button type="button" class="btn btn-outline-dark" id="uploadBtn">업로드 하기</button>
     </div>
 </body>
