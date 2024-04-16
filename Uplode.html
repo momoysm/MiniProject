@@ -48,7 +48,6 @@
 
 
     $("#uploadBtn").click(async function () {
-        // alert("test");
         let photo = $('#photo').val();
         let name = $('#name').val();
         let birth = $('#birth').val();
@@ -68,7 +67,7 @@
             'myAdvantages': myAdvantages,
             'myWorkStyle': myWorkStyle,
         };
-        await addDoc(collection(db, "test"), doc);
+        await addDoc(collection(db, "user"), doc);
         alert("저장 완료");
         window.location.reload();
     })
