@@ -19,13 +19,15 @@
     <style>
         .title {
             height: 150px;
+
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-image: url("");
+
+            /* background-color: white;
             background-position: center;
-            background-size: cover;
+            background-size: cover; */
         }
 
         .title>a {
@@ -34,13 +36,13 @@
             font-style: normal;
             font-size: 62px;
             text-decoration: none;
-            color: black;
+            color: rgb(224, 0, 253);
         }
 
 
         .main {
             color: black;
-            background-image: url('https://i.namu.wiki/i/pKNJ1s47fRbIl43A_L8mrMC5xbpZ-Xfn6xm8dFvW4MQvGJWDke2bsonroliD6negDLxxikX-Or_k69AA77p5kAStt3RA4riYhxqRSPgEC08XrZRQ1mMb0XclTVTZm9Rdk9oToFYtAU-Nmi0soCt2gg.webp');
+            background-image: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxODAxMDhfMTU3%2FMDAxNTE1NDA3ODM0MDQy.9ogm3MOFNBDnJ7TCOcRMT2hAOetnTG0HMBFRhwjk14og.ccZAkq-gWAF0l_XX3zxMUrPSfa1I1wW70c6a92LtRo0g.PNG.ehdrkd1229%2FScreenshot_20171228-191830.png&type=sc960_832');
             background-position: center;
             background-size: cover;
         }
@@ -56,16 +58,36 @@
         }
 
         .container-fluid .table {
-            width: 350px;
+            width: 300px;
             float: left;
             border: 1px solid white;
             /* 조정할 여백 값 */
         }
 
-        .thumbnail {
-            width: 400px;
+        .container-fluid .table th:not(:first-child),
+        .container-fluid .table td:not(:first-child) {
+            white-space: normal;
+            /* 줄바꿈 허용 */
 
         }
+
+        .container-fluid .table th:first-child,
+        .container-fluid .table td:first-child {
+            white-space: nowrap;
+            /* 줄바꿈 방지 */
+        }
+
+        /* 블로그 주소가 길 경우 줄바꿈 발생 */
+        #UserVlogAddress {
+            word-break: break-all;
+        }
+
+        .thumbnail {
+            width: 100%;
+            /* 요소의 너비를 100%로 설정하여 이미지가 부모 요소의 전체 너비를 차지하도록 함 */
+            height:450px;
+        }
+
     </style>
 
 
@@ -74,6 +96,7 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -92,27 +115,106 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
+        const db = getFirestore(app); // Initialize Firestore
 
         async function fetchData() {
+            // URL에서 사용자 ID 가져오기
             const urlParams = new URLSearchParams(window.location.search);
-            const petId = urlParams.get('petId');
-            let docs = await getDocs(collection(db, "pets"));
+            const userId = urlParams.get('userId');
 
+            // Firebase에서 사용자 데이터 가져오기
+            let docs = await getDocs(collection(db, "user"));
+
+            // 사용자 ID에 해당하는 데이터 찾기
             docs.forEach((doc) => {
                 let row = doc.data();
-                let UserUniqueId = doc.id; // 강아지의 고유 ID
+                let UserUniqueId = doc.id; // 유저의 고유 ID
 
-                if (UserUniqueId === UserId) { // petId와 일치하는 동물 정보만 처리
-                    let name = row['name']; //
+                if (UserUniqueId === userId) {
+                    let photo = row['photo'];
+                    let name = row['name'];
+                    let birth = row['birth'];
+                    let mbti = row['mbti'];
+                    let phone = row['phone'];
+                    let blog = row['blog'];
+                    let aboutMe = row['aboutMe'];
+                    let myAdvantages = row['myAdvantages'];
+                    let myWorkStyle = row['myWorkStyle'];
 
-
-                    // UserInfo div에 HTML 추가
+                    let UserInfoHTML = `
+                <div class="container-fluid">
+                    <!-- 이미지 + 제목 -->
+                    <div class="row mt-5 align-items-start">
+                        <div class="col-md-6">
+                            <div class="thumbnail">
+                                <img src="${photo}" style="height:450px; class="img-thumbnail" alt="이미지 준비중...">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="container-fluid py-3">
+                                <h1 class="display-6 fw-bold">${name}</h1>
+                            </div>
+                            <table class="table table-bordered border-dark">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">이름</th>
+                                        <th scope="col" id="UserName">${name}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">아이디</th>
+                                        <td id="UserId">${userId}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">생년월일</th>
+                                        <td id="UserBirthDay">${birth}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">MBTI</th>
+                                        <td id="UserMbti">${mbti}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">연락처</th>
+                                        <td id="UserPhone">${phone}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">블로그 주소</th>
+                                        <td id="UserVlogAddress">${blog}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 나머지 내용 -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <ol class="list-group list-group-numbered">
+                                <li class="list-group-item">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">나에 대하여</div>
+                                        ${aboutMe}
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">나의 장점</div>
+                                        ${myAdvantages}
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">나의 협업 스타일</div>
+                                        ${myWorkStyle}
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>`;
                     $('#UserInfo').html(UserInfoHTML);
-
-
                 }
             });
-            console.log(UserId);
         }
         fetchData();
 
@@ -126,87 +228,24 @@
             <div class="p-5 mb-4 bg-body-tertiary rounded-3">
                 <div class="container-fluid py-5">
                     <div class="title">
-                        <a href="Main.html">비실비실이네</a>
+                        <a href="MainPlus.html">비실비실이네</a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
     <!-- (이미지 + 상세정보 테이블) 블록 -->
-    <div class="container-fluid">
-        <!-- 이미지 + 제목 -->
-        <div class="row mt-5 align-items-start">
-            <!-- 이미지와 목록을 수평으로 배치 -->
-            <div class="col-md-6">
-                <div class="thumbnail">
-                    <img src="https://i.namu.wiki/i/XCgVNK5_dzBFiyf_y4Ku6DY39pN-ktGg7_qTurCgSLmO_0B2QPXCkwKg5cmjsr4WWYL-ASQsMv6zkq5xdMbDxQliIZLLK6ZS8C84xtzf3VKRsH2J8y8Cg0scnm1dtEAjvhs4mWINIDEmk3lfOB5TEw.webp"
-                        class="img-thumbnail" alt="이미지 준비중...">
-                </div>
+    <div id="UserInfo"></div>
 
-            </div>
-            <div class="col-md-6">
-                <div class="container-fluid py-3">
-                    <h1 class="display-6 fw-bold">${name}</h1>
-                </div>
-                <table class="table table-bordered border-dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">이름</th>
-                            <th scope="col" id="UserName">${name}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">아이디</th>
-                            <td id="UserId">${id}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">생년월일</th>
-                            <td id="UserBirthDay">${bDay}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">MBTI</th>
-                            <td id="UserMbti">${mbti}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">연락처</th>
-                            <td id="UserPhone">${phone}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">블로그 주소</th>
-                            <td id="UserVlogAddress">${address}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- 나머지 내용 -->
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <ol class="list-group list-group-numbered">
-                    <li class="list-group-item">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold">나에 대하여</div>
-                            나에 대한 설명나에 대한 설명나에 대한 설명나에 대한 설명나에 대한 설명
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold">나의 장점</div>
-                            나의 장점나의 장점나의 장점나의 장점나의 장점나의 장점나의 장점
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold">나의 협업 스타일</div>
-                            나의 협업 스타일나의 협업 스타일나의 협업 스타일나의 협업 스타일나의 협업 스타일
-                        </div>
-                    </li>
-                </ol>
 
-            </div>
-        </div>
-    </div>
+    <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+        <p class="mb-1">© 2024 B-11 bishilbishil</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
 </body>
 
 
