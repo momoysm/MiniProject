@@ -36,7 +36,9 @@
             font-style: normal;
             font-size: 62px;
             text-decoration: none;
-            color: rgb(224, 0, 253);
+            color: white;
+            text-shadow: 2px 2px 2px gray;
+            /* -webkit-text-stroke: 1px white; */
         }
 
         .team{
@@ -44,22 +46,43 @@
             min-height: 300px;
             max-height: 700px;
 
-            display: flex;
             margin: 30px auto;
 
-            border: 1px solid white;
+            border: 3px solid white;
             border-radius: 5px;
         }
 
         .team > h4{
-            color: rgb(224, 0, 253);
             margin-left: 20px;
-            font-size: 32px;
+            margin-top: 10px;
+            font-family: "Jua", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 42px;
+            text-decoration: none;
+            color: white;
+            text-shadow: 2px 2px 2px gray;
+        }
+
+        .team > p{
+            margin-left: 30px;
+            margin-top: 10px;
+            font-family: "Jua", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 24px;
+            text-decoration: none;
+            color: white;
+            text-shadow: 2px 2px 2px gray;
         }
 
         .members{
             width: 1200px;
             margin: 30px auto;
+        }
+
+        .card{
+            cursor: pointer;
         }
     </style>
 </head>
@@ -70,69 +93,24 @@
 
     <div class="team">
         <h4>팀 소개</h4>
+        <p>팀의 특징:</p>
+        <p>팀의 목표:</p>
+        <p>팀의 약속:</p>
+        <p>팀에 대한 설명:</p>
     </div>
     
     <div class="members">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card">
-                    <img src="https://i.namu.wiki/i/pFRLt0rdlfASsGkyBaLi10-h1kgyADwzqmkoUCYfydav2zvwHcCTKnULwtIg9Tw0Ivu_LLOE7FxjVUZVdeO-Hw.webp" style="height: 450px;" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">이름</h5>
-                        <p class="card-text">소개</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col">
-                <div class="card">
-                    <img src="https://i.namu.wiki/i/36_AhN1b7V3gDdPCxpqTFVV0NXfydnNgpQaav-4xliUeFmYU9hrjOt_8he7V_OVwLw6-2vYU0ZFrBNIMsGnTqg.webp" style="height: 450px;" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">이름</h5>
-                        <p class="card-text">소개</p>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="col">
-                <div class="card">
-                    <img src="https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/459/686f5b68a40dc8032496e9f76fdc4c6d_res.jpeg" style="height: 450px;" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">이름</h5>
-                        <p class="card-text">소개</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col">
-                <div class="card">
-                    <img src="https://i.namu.wiki/i/nBCg8TOs3R5G6HJH0LcNtap3dNVTFAFjkTA2goaSeD8IFKwLZo9yl3pSjgl9PQx1toQZXstgi0YoPWtyhsz7nA.webp" style="height: 450px;" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">이름</h5>
-                        <p class="card-text">소개</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiIatdWrORuEzq42Jh5NUb-TmcaKXCsUkYM9vth87utw&s" style="height: 450px;" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">이름</h5>
-                        <p class="card-text">소개</p>
-                    </div>
-                </div>
-            </div>
+        <div id="memberCards" class="row row-cols-1 row-cols-md-3 g-4">
     
         </div>
     </div>
-    
-
 </body>
 <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+    import { getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -150,6 +128,31 @@
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+
+    let docs = await getDocs(collection(db, "user"));
+    docs.forEach((docs) => {
+        let row = docs.data();
+        let id = docs.id;
+
+        let introduce = row.aboutMe;
+        let name = row.name;
+        let photo = row.photo;
+        $('#memberCards').append(`
+            <div class="col">
+                <div class="card" id=${id}>
+                    <img src=${photo} style="height: 450px;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">${name}</h5>
+                        <p class="card-text">${introduce}</p>
+                    </div>
+                </div>
+            </div>`);
+    })
+
+    $(".card").click(function(){
+        let userId = this.getAttribute("id");
+        location.href = `Detail.html?userId=${userId}`;
+    })
 </script>
 </html>
