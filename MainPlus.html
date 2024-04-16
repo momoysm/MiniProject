@@ -157,7 +157,7 @@
     </div>
 
     <div class="btn_group">
-        <button type="button">업로드</button>
+        <button type="button" id="upload">업로드</button>
     </div>
 
     <div class="footer">
@@ -211,7 +211,12 @@
 
     $(".card").click(function(){
         let userId = this.getAttribute("id");
+
         location.href = `Detail.html?userId=${userId}`;
+    })
+
+    $('#upload').click(function(){
+        location.href = `Uplode.html`;
     })
 </script>
 </html>
