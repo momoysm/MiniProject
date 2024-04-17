@@ -1,20 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <title>upload</title>
+
+    <!-- 부트스트랩 import -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+        </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Jua&display=swap" rel="stylesheet">
+
+    <!-- 제이쿼리 import -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <!-- CSS -->
 <style>
-    .uploadArea{
+    .title {
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .title>a {
+        font-family: "Jua", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 62px;
+        text-decoration: none;
+        color: white;
+        text-shadow: 2px 2px 2px gray;
+        /* -webkit-text-stroke: 1px white; */
+    }
+
+
+    .uploadArea {
         width: 700px;
         margin: 20px auto 20px auto;
+    }
+
+    body {
+        background-image: url('https://postfiles.pstatic.net/20160515_93/goodadsign_1463303697827fbPMP_JPEG/dora2.JPG?type=w2');
+        background-repeat: repeat;
     }
 </style>
 
@@ -77,46 +113,71 @@
 
 
 <!-- Body -->
+
 <body>
-    <div class="uploadArea" id="uploadArea">
-        <div class="form-floating mb-3">
+
+    <header>
+        <div class="main">
+            <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+                <div class="container-fluid py-5">
+                    <div class="title">
+                        <a href="MainPlus.html">비실비실이네</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="uploadArea text-center" id="uploadArea">
+        <div class="form-floating mb-4">
             <input type="email" class="form-control" id="photo" placeholder="이미지 주소">
             <label for="floatingInput">이미지 주소</label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-4">
             <input type="email" class="form-control" id="name" placeholder="이름">
             <label for="floatingInput">이름</label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-4">
             <input type="email" class="form-control" id="birth" placeholder="생년월일">
             <label for="floatingInput">생년월일</label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-4">
             <input type="email" class="form-control" id="mbti" placeholder="mbti">
             <label for="floatingInput">MBTI</label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-4">
             <input type="email" class="form-control" id="phone" placeholder="연락처">
             <label for="floatingInput">연락처</label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-4">
             <input type="email" class="form-control" id="blog" placeholder="블로그 주소">
             <label for="floatingInput">블로그 주소</label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-4">
             <input type="email" class="form-control" id="aboutMe" placeholder="나에 대하여">
             <label for="floatingInput">나에 대하여</label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-4">
             <input type="email" class="form-control" id="myAdvantages" placeholder="나의 장점">
             <label for="floatingInput">나의 장점</label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-5">
             <textarea type="email" class="form-control" id="myWorkStyle" placeholder="나의 협업 스타일"></textarea>
             <label for="floatingInput">나의 협업 스타일</label>
         </div>
-
+    
+        <!-- Upload button -->
         <button type="button" class="btn btn-outline-dark" id="uploadBtn">업로드 하기</button>
+
+        <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+            <p class="mb-1">© 2024 B-11 bishilbishil</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Privacy</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+        </footer>
     </div>
 </body>
+
 </html>
