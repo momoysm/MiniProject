@@ -23,9 +23,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
 
-        .title > a{
+        .title > p{
+            margin: 10px 0 10px 0;
             font-family: "Jua", sans-serif;
             font-weight: 400;
             font-style: normal;
@@ -33,39 +35,25 @@
             text-decoration: none;
             color: white;
             text-shadow: 2px 2px 2px gray;
-            /* -webkit-text-stroke: 1px white; */
         }
 
         .team{
             width: 1200px;
             min-height: 300px;
             max-height: 700px;
-
             margin: 30px auto;
-
             border: 3px solid white;
             border-radius: 5px;
         }
 
-        .team > h4{
-            margin-left: 20px;
-            margin-top: 10px;
-            font-family: "Jua", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            font-size: 42px;
-            text-decoration: none;
-            color: white;
-            text-shadow: 2px 2px 2px gray;
-        }
-
         .team > p{
             margin-left: 30px;
-            margin-top: 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
             font-family: "Jua", sans-serif;
             font-weight: 400;
             font-style: normal;
-            font-size: 24px;
+            font-size: 32px;
             text-decoration: none;
             color: white;
             text-shadow: 2px 2px 2px gray;
@@ -102,7 +90,6 @@
 
         .btn_group > button{
             float: right;
-            /* background-color:#0a0a23; */
             background-color: transparent;
             color: #fff;
 
@@ -110,14 +97,14 @@
             border:3px solid white;
             border-radius:10px; 
 
-            padding:15px;
-            min-height:30px; 
+            padding: 15px;
+            height: 60px; 
             min-width: 120px;
 
             font-family: "Jua", sans-serif;
             font-weight: 400;
             font-style: normal;
-            font-size: 26px;
+            font-size: 20px;
         }
 
         .footer{
@@ -138,11 +125,10 @@
 </head>
 <body>
     <div class="title">
-        <a href="#">비실비실이네</a>
+        <p>팀 소개</p>
     </div>
 
     <div class="team">
-        <h4>팀 소개</h4>
         <p>팀 이름 : <span>비실비실</span></p>
         <p>팀의 특징 : <span>전혀 비실비실하지않다</span></p>
         <p>팀의 목표 : <span>세계 최고의 개발자!</span></p>

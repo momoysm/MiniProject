@@ -33,6 +33,11 @@
         }
 
         .title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
             height: 150px;
             display: flex;
             flex-direction: column;
@@ -40,7 +45,7 @@
             justify-content: center;
         }
 
-        .title>a {
+        .title >a {
             font-family: "Jua", sans-serif;
             font-weight: 400;
             font-style: normal;
@@ -48,7 +53,7 @@
             text-decoration: none;
             color: white;
             text-shadow: 2px 2px 2px gray;
-            /* -webkit-text-stroke: 1px white; */
+            text-align: center;
         }
         
     </style>
@@ -79,28 +84,20 @@
 </head>
 
 <body>
-    <header>
-        <div class="main">
-            <div class="p-5 mb-4 bg-body-tertiary rounded-3">
-                <div class="container-fluid py-5">
-                    <div class="title">
-                        <a href="MainPlus.html">비실비실이네</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    <div class="title">
+        <a href="MainPlus.html">비실비실이네
+            <br>입장하기
+        </a>
+    </div>
 
-    <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+    <!-- <footer class="my-5 pt-5 text-body-secondary text-center text-small">
         <p class="mb-1">© 2024 B-11 bishilbishil</p>
         <ul class="list-inline">
             <li class="list-inline-item"><a href="#">Privacy</a></li>
             <li class="list-inline-item"><a href="#">Terms</a></li>
             <li class="list-inline-item"><a href="#">Support</a></li>
         </ul>
-    </footer>
+    </footer> -->
 
 </body>
-
-
 </html>
