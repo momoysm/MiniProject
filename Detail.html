@@ -69,10 +69,21 @@
         }
 
         .container-fluid .table {
-            width: 300px;
+            width: 350px;
+            height: 350px;
             float: left;
             border: 1px solid white;
-            /* 조정할 여백 값 */
+            margin: 20px;
+            /* 여백 통일 */
+        }
+
+        .container-fluid .table th,
+        .container-fluid .table td {
+            text-align: center;
+            /* 텍스트 중앙 정렬 */
+            vertical-align: middle;
+            /* 세로 중앙 정렬 */
+
         }
 
         .container-fluid .table th:first-child,
@@ -86,10 +97,15 @@
             word-break: break-all;
         }
 
+        #UserInfo {
+            width: 100%;
+            /* 또는 필요한 넓이 값으로 조정 */
+        }
+
         .thumbnail {
             width: 100%;
             /* 요소의 너비를 100%로 설정하여 이미지가 부모 요소의 전체 너비를 차지하도록 함 */
-            height: 450px;
+            height: 500px;
         }
     </style>
 
@@ -160,26 +176,22 @@
                             <table class="table table-bordered border-dark">
                                 <thead>
                                     <tr>
-                                        <th scope="col">이름</th>
+                                        <th class="text-center" scope="col">이름</th>
                                         <th scope="col" id="UserName">${name}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th scope="row">생년월일</th>
+                                        <th class="text-center" scope="row">생년월일</th>
                                         <td id="UserBirthDay">${birth}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">MBTI</th>
+                                        <th class="text-center" scope="row">MBTI</th>
                                         <td id="UserMbti">${mbti}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">연락처</th>
+                                        <th class="text-center" scope="row">연락처</th>
                                         <td id="UserPhone">${phone}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">블로그 주소</th>
-                                        <td id="UserVlogAddress">${blog}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -205,6 +217,12 @@
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold">나의 협업 스타일</div>
                                         ${myWorkStyle}
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">나의 블로그 주소</div>
+                                        ${blog}
                                     </div>
                                 </li>
                             </ol>
